@@ -1,0 +1,52 @@
+.qk-qr-code {
+  //position: fixed;
+  //z-index: 999;
+  //left: 0;
+  //top: 0;
+  &-wrap {
+    //padding: 10px;
+    text-align: center;
+    background: #fff;
+    box-sizing: border-box;
+    font-family: 'Microsoft Yahei', serif;
+  }
+  &__title {
+    color: fade(#000000, 75);
+    font-size: var(--fontSize);
+    line-height: 1.2;
+    position: relative;
+    &-margin{
+      padding-bottom: var(--margin);
+    }
+    textarea {
+      width: 100%;
+      color: fade(#000000, 75);
+      font-family: 'Microsoft Yahei', serif;
+      font-size: var(--fontSize);
+      border: none;
+      resize: none;
+      outline: none;
+      text-align: center;
+      height: 30px;
+      line-height: 1.2;
+    }
+    .icon-edit {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: url('./images/icon-edit.svg');
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      margin-right: -40px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  .btn-group {
+    margin-top: 15px;
+  }
+}
