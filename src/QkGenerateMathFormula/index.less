@@ -1,0 +1,32 @@
+.qk-math-formula {
+  sum {
+    position: relative;
+    display: inline-block;
+    &::before {
+      content: '\2211';
+    }
+    &::after {
+      font-size: var(--min-font-size);
+      opacity: 0;
+      content: attr(content);
+    }
+    sub {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: -0.1rem;
+      line-height: 1;
+    }
+    sup {
+      position: absolute;
+      top: 0;
+      line-height: 1;
+    }
+  }
+  underline {
+    text-decoration: underline;
+  }
+  overline {
+    text-decoration: underline;
+    text-underline-offset: calc(var(--font-size) * -1);
+  }
+}

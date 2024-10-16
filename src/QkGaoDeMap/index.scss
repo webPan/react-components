@@ -1,0 +1,196 @@
+.qk-gao-de-map {
+  &.qk-pointer-events-none {
+    .amap-labellayers,
+    .amap-overlays,
+    .tip-info-panel,
+    .shortcut-tip--simple {
+      pointer-events: none;
+    }
+  }
+  .icon-arrow{
+    display: block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    transform: rotate(45deg);
+    border-left-width: 0;
+    border-bottom-width: 0;
+  }
+  .amap-info-close {
+    display: none;
+  }
+  .shortcut-tip--complex {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    z-index: 9;
+    .text-tip {
+      font-size: 20px;
+      width: 220px;
+      height: 30px;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      position: absolute;
+      font-weight: lighter;
+    }
+  }
+  .shortcut-tip--simple {
+    position: absolute;
+    z-index: 9;
+    font-size: 16px;
+    left: 10px;
+    bottom: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+  }
+  .amap-markers {
+    z-index: 99999 !important;
+  }
+  // 点扩闪动效
+  @mixin DIFFUSION($color) {
+    0% {
+      box-shadow: 0 0 0 0 $color;
+    }
+    100% {
+      box-shadow: 0 0 0 10px rgba($color, 0);
+    }
+  }
+  &{
+    @keyframes DIFFUSION {
+      0% {
+        box-shadow: 0 0 0 0 var(--color);
+      }
+      100% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
+    }
+  }
+  .icon-marker {
+    display: block;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    position: relative;
+    border-radius: 50%;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+      animation: DIFFUSION 1.5s ease both infinite;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+      animation: DIFFUSION 3s 1.5s ease both infinite;
+    }
+
+    &--active {
+      &:after {
+        content: '';
+        position: absolute;
+        width: calc(var(--size) * 2);
+        height: calc(var(--size) * 2);
+        left: -50%;
+        top: -50%;
+        background: var(--color);
+        opacity: 0.5;
+        border-radius: 50%;
+        color: var(--color);
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        width: calc(var(--size) * 3);
+        height: calc(var(--size) * 3);
+        background: var(--color);
+        left: -50%;
+        top: -50%;
+        margin-left: calc(var(--size) * -1 / 2);
+        margin-top: calc(var(--size) * -1 / 2);
+        opacity: 0.3;
+        border-radius: 50%;
+        color: var(--color);
+      }
+    }
+  }
+
+  // 隐藏高德地图logo
+  .amap-logo {
+    display: none;
+    opacity: 0 !important;
+  }
+  .amap-copyright {
+    opacity: 0;
+  }
+  // 弹框信息
+  .tip-info-panel {
+    position: relative;
+    background: rgba(6, 34, 40, 0.8);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+    padding: 15px 20px;
+    border-radius: 4px;
+    min-width: 300px;
+    &:before {
+      content: '';
+      border: 8px solid rgba(6, 34, 40, 0.8);
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      border-left-color: transparent;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-bottom: -16px;
+    }
+    .panel-header {
+      margin-bottom: 10px;
+      h2 {
+        font-size: 14px;
+        color: #fff;
+        margin-bottom: 0;
+      }
+      .btn-more {
+        color: #5ec3be;
+        font-size: 12px;
+        cursor: pointer;
+      }
+    }
+    .panel-body {
+      ul {
+        margin-bottom: 0;
+        li {
+          padding: 5px 0;
+          font-size: 12px;
+          .text-label {
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 10px;
+            display: inline-block;
+            width: 60px;
+          }
+          .text-value {
+            color: rgba(255, 255, 255, 1);
+          }
+        }
+      }
+    }
+  }
+}
