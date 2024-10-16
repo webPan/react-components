@@ -5,8 +5,8 @@ hero:
   actions:
     - text: 概览
       link: /
-    - text: GitHub
-      link: /
+    - text: 技术博客
+      link: https://www.cnblogs.com/yz-blog
 features:
   - title: Typescript
     emoji: 💎

@@ -27,10 +27,10 @@ const Example = ()=>{
       </Paragraph>
     </Typography>
     <p>原始格式：{html}</p>
-    <QkGenerateMathFormula content={html}/>
+    输出格式：<QkGenerateMathFormula content={html}/>
     <Divider/>
     <p>原始格式：{html2}</p>
-    <QkGenerateMathFormula content={html2}/>
+    输出格式：<QkGenerateMathFormula content={html2}/>
   </div>
 }
 

@@ -1,6 +1,6 @@
-import {QkGaoDeMap} from 'react-components';
 import { Typography } from 'antd';
 import React from 'react';
+import { QkGaoDeMap } from 'react-components';
 const { Title, Paragraph, Text, Link } = Typography;
 
 const Example = () => {
@@ -8,11 +8,10 @@ const Example = () => {
     <div>
       <Typography>
         <Title>QkGaoDeMap 组件</Title>
+        <h2>基于 高德地图 二次封装，将高频使用的功能都写进了组件</h2>
         <Paragraph>
           <ul>
-            <li>
-              基于 高德地图 二次封装，将高频使用的功能都写进了组件，使用接口启用
-            </li>
+            <li>123</li>
           </ul>
         </Paragraph>
       </Typography>
@@ -26,8 +25,8 @@ const Example = () => {
               id: 1,
               color: 'red',
               address: '上海市静安区东方明珠',
-              size: 12
-            }
+              size: 12,
+            },
           ]}
           tileLayerOptions={{}}
           districtLayerOptions={{}}
@@ -35,13 +34,13 @@ const Example = () => {
             center: [106.258754, 38.471317],
             zoomEnable: true, // 是否缩放
             dragEnable: true, // 是否拖动
-            showLabel: false
+            showLabel: false,
           }}
           strokeOptions={{
             strokeWeight: 2,
             fillColor: '#002322',
             fillOpacity: 0.62,
-            name: '中国'
+            name: '中国',
           }}
           mapZoomShortcut="ctrl+mousewheel"
           autoLocateScaleLevels={true}

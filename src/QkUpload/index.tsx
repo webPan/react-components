@@ -1,31 +1,31 @@
+import {
+  DownOutlined,
+  ExclamationCircleOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
+import type { UploadProps } from 'antd';
+import { Button, Tooltip, Upload } from 'antd';
+import classnames from 'classnames';
 import type { CSSProperties } from 'react';
 import React, {
-  useRef,
-  useState,
-  useLayoutEffect,
+  forwardRef,
   useCallback,
   useImperativeHandle,
-  forwardRef
+  useLayoutEffect,
+  useRef,
+  useState,
 } from 'react';
-import classnames from 'classnames';
-import type { UploadProps } from 'antd';
-import { Button, Upload, Tooltip } from 'antd';
-import {
-  UploadOutlined,
-  DownOutlined,
-  ExclamationCircleOutlined
-} from '@ant-design/icons';
-import type { QkUploadType } from './index.d';
+import useAttachmentListItemRender from './hooks/useAttachmentListItemRender';
+import { type QkUploadType } from './index.d';
 import './index.less';
 import languageDict from './language';
-import useAttachmentListItemRender from './hooks/useAttachmentListItemRender';
 export type UploadHandle = {
   onTriggerUpload: () => void;
 };
 /** 文件上传组件 带进度条 */
 const QkUploadFund = (
   props: UploadProps & QkUploadType,
-  ref: React.Ref<unknown>
+  ref: React.Ref<unknown>,
 ) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   /** 文件上传单行高度 */
@@ -50,14 +50,14 @@ const QkUploadFund = (
   } = props;
   /** 展开收缩 */
   const [retraction, setRetraction] = useState<'stow' | 'open'>(
-    retractionEnable ? 'stow' : 'open'
+    retractionEnable ? 'stow' : 'open',
   ); //默认收缩
   /** 文件行信息 */
   const [row, setRow] = useState({
     singleHeight: 0, //单行高
     multiHeight: 0, //多行高
     actualRows: 0, //实际多少行
-    rows: 3 //一行放多少个
+    rows: 3, //一行放多少个
   });
   const uploadProps: UploadProps = {
     defaultFileList,
@@ -72,10 +72,10 @@ const QkUploadFund = (
         attachmentListItemFooterExtendRender,
         (h) => {
           uploadListItemHeight.current = h;
-        }
+        },
       );
     },
-    ...otherProps
+    ...otherProps,
   };
   /** 展开收起切换 */
   const uploadRef = useRef<HTMLButtonElement>(null);
@@ -113,7 +113,7 @@ const QkUploadFund = (
       multiHeight:
         (uploadListItemHeight.current + 24) * actualRows + FIXEDSPACING,
       actualRows,
-      rows
+      rows,
     });
   }, [fileList?.length]);
   useLayoutEffect(() => {
@@ -123,13 +123,13 @@ const QkUploadFund = (
   /** 把收缩展开功能暴露到外部，可通过ref访问 */
   useImperativeHandle(ref, () => ({
     setRetraction,
-    onTriggerUpload
+    onTriggerUpload,
   }));
   const ThemeColor = {
     collection: '#F6FFFA',
     operation: '#F6FFFA',
     certified: '#F6F6FF',
-    fund: '#F6F6FF'
+    fund: '#F6F6FF',
   };
   return (
     <div
@@ -142,8 +142,8 @@ const QkUploadFund = (
           'upload-panel--stow': retraction === 'stow',
           'upload-panel--open': retraction === 'open',
           'upload-panel--auto': row.actualRows < 3,
-          'not-upload-file': !fileList?.length
-        }
+          'not-upload-file': !fileList?.length,
+        },
       )}
       style={
         {
@@ -152,7 +152,7 @@ const QkUploadFund = (
               ? row.singleHeight + 'px'
               : row.multiHeight + 'px',
           '--theme-color': ThemeColor[theme],
-          '--rows': row.rows
+          '--rows': row.rows,
         } as CSSProperties
       }
     >
@@ -161,7 +161,7 @@ const QkUploadFund = (
           <div className="flex-1">
             <span
               className={classnames('font-bold', {
-                'upload-required': required
+                'upload-required': required,
               })}
             >
               {title}
@@ -217,7 +217,7 @@ const QkUploadFund = (
             }}
           >
             <span>
-              {retraction == 'stow'
+              {retraction === 'stow'
                 ? languageDict.expand[language]
                 : languageDict.collapse[language]}
             </span>

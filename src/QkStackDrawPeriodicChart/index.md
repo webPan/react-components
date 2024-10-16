@@ -123,7 +123,8 @@ const Example = () => {
         <Title>QkStackDrawPeriodicChart 时间周期图表</Title>
         <Paragraph>
           <ul>
-            <li>以时间周期为维度的周期图表</li>
+            <li>基于fabric.js以时间周期为维度的周期图表</li>
+            <li>支持宽度自适应</li>
           </ul>
         </Paragraph>
       </Typography>
