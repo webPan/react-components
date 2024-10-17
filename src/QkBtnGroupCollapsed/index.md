@@ -4,6 +4,7 @@
 
 - 按钮过多，可以选择性将按钮放入到更多中
 
+## 示例
 ```tsx
 import { QkBtnGroupCollapsed } from 'react-components';
 import React from 'react';
@@ -40,4 +41,21 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+
+```ts
+/** 按钮展开 收起 */
+type QkBtnGroupCollapsedType = {
+  /** 数据源 */
+  data: {
+    label: string; //按钮文字
+    key: string | number; //key
+    collapsed?: boolean; //石佛折叠
+    show?: boolean; //是否显示
+    disabled?: boolean; //是否禁用
+  }[];
+  onClick?: (value: string) => void; //点击事件
+};
 ```

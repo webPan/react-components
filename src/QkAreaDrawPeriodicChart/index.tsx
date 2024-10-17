@@ -1,17 +1,18 @@
-import React, { useLayoutEffect, useRef } from 'react';
 import { fabric } from 'fabric';
 import _ from 'lodash';
+import React, { useLayoutEffect, useRef } from 'react';
 
 interface Column {
-  background: string;
-  color: string;
+  background: string; //背景颜色
+  color: string; //文字颜色
   list: { title: string; value: number }[];
 }
 
 interface DataItem {
-  name?: string;
-  start: string;
-  end: string;
+  name?: string; //名字
+  start: string; //起始时间
+  end: string; //结束时间
+  //各行数据
   columns: {
     w?: Column;
     s?: Column;
@@ -47,7 +48,7 @@ const formattedNumber = (num: number, digit = 2) => {
   try {
     return num.toLocaleString('en-US', {
       minimumFractionDigits: digit,
-      maximumFractionDigits: digit
+      maximumFractionDigits: digit,
     });
   } catch (e) {
     return num;
@@ -58,7 +59,7 @@ const formattedNumber = (num: number, digit = 2) => {
 type ObjectOf<T> = { [key: string]: T | ObjectOf<T> };
 function mergeNestedObjects<T>(
   baseObj: ObjectOf<T>,
-  objToMerge: ObjectOf<T>
+  objToMerge: ObjectOf<T>,
 ): ObjectOf<T> {
   const mergedObj: ObjectOf<T> = { ...baseObj };
 
@@ -76,7 +77,7 @@ function mergeNestedObjects<T>(
 
         mergedObj[key] = mergeNestedObjects(
           mergedValue as ObjectOf<T>,
-          valueToMerge as ObjectOf<T>
+          valueToMerge as ObjectOf<T>,
         );
       }
     }
@@ -87,11 +88,12 @@ function mergeNestedObjects<T>(
 
 interface QkAreaDrawPeriodicChartType {
   /** 数据 */
-  data: DataItem[];
+  data: DataItem[]; //数据源
   options?: {
-    width?: number;
-    height?: number;
+    width?: number; //宽度
+    height?: number; //高度
     background?: string; //背景色
+    //上下左右间隙
     margin?:
       | {
           left: 0;
@@ -107,21 +109,26 @@ interface QkAreaDrawPeriodicChartType {
       radius?: number; //圆角
       minHeight?: number; // 最小高度
     };
+    //X轴配置
     xAxios?: {
-      show?: boolean;
+      show?: boolean; //是否显示X轴
+      //X轴文字样式
       nameTextStyle?: {
-        color?: string;
-        fontSize?: number;
+        color?: string; //文字颜色
+        fontSize?: number; //文字大小
       };
+      //自定义X轴内容
       nameRender?: (date: Date, index: number) => string | null;
     };
+    //Y轴配置
     yAxios?: {
       height?: number; //刻度高度
-      show?: boolean;
+      show?: boolean; //是否显示Y轴
       width?: number; //Y轴展示的宽度
+      //Y轴文字样式
       nameTextStyle?: {
-        color?: string;
-        fontSize?: number;
+        color?: string; //文字颜色
+        fontSize?: number; //字体大小
       };
     };
     [key: string]: any;
@@ -130,7 +137,7 @@ interface QkAreaDrawPeriodicChartType {
 
 const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
   options = {},
-  data
+  data,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<HTMLDivElement>(null);
@@ -140,20 +147,20 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
       top: 10,
       right: 10,
       bottom: 10,
-      left: 10
+      left: 10,
     },
     yAxios: {
       width: 50,
-      height: 60
+      height: 60,
     },
     strip: {
       width: 28,
       margin: 20,
       radius: 15,
-      minHeight: 30
+      minHeight: 30,
     },
     background: 'transparent',
-    height: 390
+    height: 390,
   };
   options = mergeNestedObjects(defaultOptions, options);
 
@@ -184,7 +191,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
     marginLeft,
     marginTop,
     marginRight,
-    marginBottom
+    marginBottom,
   });
   console.log(options);
   //已分组数据
@@ -197,7 +204,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
       stroke: '#E6E6E6',
       strokeWidth: 1,
       selectable: false, // 禁用选择
-      hoverCursor: 'normal'
+      hoverCursor: 'normal',
     });
   };
 
@@ -207,7 +214,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
       stroke: '#CCD6EB',
       strokeWidth: 1,
       selectable: false, // 禁用选择
-      hoverCursor: 'normal'
+      hoverCursor: 'normal',
     });
   };
 
@@ -220,7 +227,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
       fontFamily: 'Arial',
       selectable: false, // 禁用选择
       hoverCursor: 'normal',
-      fill: '#666666'
+      fill: '#666666',
     });
   };
   /** 加载图表 */
@@ -245,7 +252,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
 
     /** 根据高度计算 Y轴需要绘制多少线条 */
     const yAxiosTickLen = Math.floor(
-      (height - marginTop - marginBottom) / yAxiosHeight
+      (height - marginTop - marginBottom) / yAxiosHeight,
     );
     /** 生成Y轴label */
     const yAxiosLabels = [];
@@ -273,17 +280,17 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
         const xAxisLabel: any = drawYAxisLabel(
           xAxisLabelText,
           xAxisLabelLeft,
-          xAxisLabelTop
+          xAxisLabelTop,
         );
         canvas.add(xAxisLabel);
         xAxisLabel.set({
-          top: Math.ceil(y1 - xAxisLabel.height / 2)
+          top: Math.ceil(y1 - xAxisLabel.height / 2),
         });
       }
     }
     /** 根据周期均分X轴 */
     const xAxiosTickWidth = Math.ceil(
-      (width - marginLeft - marginRight - yAxiosWidth) / data.length
+      (width - marginLeft - marginRight - yAxiosWidth) / data.length,
     );
     /** 计算1资产对应多少高度 */
     const oneAssetsHeight = yAxiosHeight / yAxiosValue;
@@ -313,13 +320,13 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
               x1: 0,
               y1: 0,
               x2: 0,
-              y2: rangeRectHeight
+              y2: rangeRectHeight,
             },
             colorStops: [
               { offset: 0, color: '#6AC1FF' },
-              { offset: 0.5, color: '#A4E2FF' }
-            ]
-          })
+              { offset: 0.5, color: '#A4E2FF' },
+            ],
+          }),
         });
         canvas.add(rangeRect);
 
@@ -332,13 +339,13 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
           let columnRectLeft = Math.floor(rangeRectLeft + startLeft / 2);
           Object.keys(columns).forEach((key, index) => {
             columnRectLeft = Math.floor(
-              rangeRectLeft + 2 + index * 60 + startLeft / 2
+              rangeRectLeft + 2 + index * 60 + startLeft / 2,
             );
             const columnRectWidth = stripWidth;
             let columnRectHeight = Math.ceil(
               columnsItemWithTotal(columns[key]?.list || []) *
                 oneAssetsHeight *
-                0.9
+                0.9,
             );
             columnRectHeight =
               columnRectHeight < stripMinHeight
@@ -355,7 +362,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
               selectable: false, // 禁用选择
               hoverCursor: 'normal',
               rx: 15,
-              ry: 15
+              ry: 15,
             });
             canvas.add(columnRect);
             /** 给柱子绘制文字 */
@@ -368,15 +375,15 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
               fontFamily: 'Arial',
               selectable: false, // 禁用选择
               hoverCursor: 'normal',
-              fill: columns[key]?.color
+              fill: columns[key]?.color,
             });
             stripText.set({
               left: Math.ceil(
-                columnRect.left + (columnRect.width - stripText.width) / 2
+                columnRect.left + (columnRect.width - stripText.width) / 2,
               ),
               top: Math.ceil(
-                columnRect.top + (columnRect.height - stripText.height) / 2
-              )
+                columnRect.top + (columnRect.height - stripText.height) / 2,
+              ),
             });
             canvas.add(stripText);
           });
@@ -387,9 +394,9 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
           const unit = 'WMh'; //单位
           const rectTextString = `${formattedNumber(
             Number(item.total),
-            2
+            2,
           )}  ${unit}\n ${item.start.substring(0, 4)} ${item.start.substring(
-            5
+            5,
           )} - ${item.end.substring(5)}`;
           const rectTextLeft = rangeRect.left;
           const rectTextTop =
@@ -402,22 +409,22 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
             fontFamily: 'Arial',
             fill: '#000',
             selectable: false, // 禁用选择
-            hoverCursor: 'normal'
+            hoverCursor: 'normal',
           });
           const unitIndex = rectTextString.indexOf(unit);
           rectText.setSelectionStyles(
             {
-              fill: '#666666'
+              fill: '#666666',
             },
             unitIndex,
-            unitIndex + unit.length
+            unitIndex + unit.length,
           );
 
           canvas.add(rectText);
           rectText.set({
             left: Math.ceil(
-              rangeRect.left + (rangeRect.width - rectText.width) / 2
-            )
+              rangeRect.left + (rangeRect.width - rectText.width) / 2,
+            ),
           });
         }
 
@@ -429,12 +436,12 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
           polylinePoints.push(
             {
               x: x1,
-              y: y1
+              y: y1,
             },
             {
               x: x2,
-              y: y2
-            }
+              y: y2,
+            },
           );
         }
       }
@@ -446,7 +453,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
         stroke: '#01B5D5',
         strokeWidth: 2,
         selectable: false, // 禁用选择
-        hoverCursor: 'normal'
+        hoverCursor: 'normal',
       });
       canvas.add(line);
     }
@@ -458,7 +465,7 @@ const QkAreaDrawPeriodicChart: React.FC<QkAreaDrawPeriodicChartType> = ({
       selection: false,
       width,
       height,
-      backgroundColor: background
+      backgroundColor: background,
     };
     const canvas = new fabric.Canvas(canvasRef.current, fabricOptions);
     loadChart({ canvas, width });

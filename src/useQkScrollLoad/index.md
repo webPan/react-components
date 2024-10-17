@@ -1,9 +1,11 @@
 # 组件懒加载
+> 可以按F12滚动页面查看DOM元素的变化
 
 - React 中一切皆组件
 - 利用 IntersectionObserver 实现懒加载方案
 - 支持自定义组件渲染时机，包括（时间、可视区域距离）
 
+## 示例
 ```tsx
 /**
  * title: 组件懒加载
@@ -88,7 +90,6 @@ const Example = () => {
       <div>48</div>
       <div>49</div>
       <div>50</div>
-
       <div>1</div>
       <div>2</div>
       <div>3</div>
@@ -163,4 +164,13 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+```ts
+type CommonType = {
+  delay?: number; //延迟加载
+  placeholder?: React.ReactNode | string | (() => React.ReactNode); //占位
+  children?: ((visible: boolean) => void) | React.ReactNode; //渲染内容
+};
 ```

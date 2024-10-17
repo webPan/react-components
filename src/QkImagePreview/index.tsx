@@ -1,13 +1,13 @@
 //todo: antd 图片预览
 import { Image, message } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import placeholder from './images/placeholder.png';
 import './index.less';
-import ReactDOM from 'react-dom';
 
 type QkImagePreviewType = {
   src: string; //图片地址
-  onCancel?: () => void;
+  onCancel?: () => void; //关闭预览回调
 };
 const QkImagePreview = (props: QkImagePreviewType) => {
   const [visible, setVisible] = useState(false);
@@ -33,7 +33,7 @@ const QkImagePreview = (props: QkImagePreviewType) => {
               onCancel?.();
             }, 200);
           }
-        }
+        },
       }}
     />
   );
@@ -51,7 +51,7 @@ const QkImagePreviewCreate = (props: Pick<QkImagePreviewType, 'src'>) => {
         document.body.removeChild(DIV);
       }}
     />,
-    DIV
+    DIV,
   );
   document.body.append(DIV);
 };

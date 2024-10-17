@@ -4,9 +4,9 @@ const wait = (delay: number) =>
   new Promise((resolve) => setTimeout(resolve, delay));
 
 type CommonType = {
-  delay?: number;
-  placeholder?: React.ReactNode | string | (() => React.ReactNode);
-  children?: ((visible: boolean) => void) | React.ReactNode;
+  delay?: number; //延迟加载
+  placeholder?: React.ReactNode | string | (() => React.ReactNode); //占位
+  children?: ((visible: boolean) => void) | React.ReactNode; //渲染内容
 };
 
 type QkScrollLoadOptions = IntersectionObserverInit & CommonType;

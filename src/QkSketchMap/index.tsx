@@ -1,6 +1,6 @@
 import { type FC, useEffect, useState } from 'react';
-const classNames = require('classnames');
 import './index.scss';
+const classNames = require('classnames');
 
 interface dataSourceItem {
   name: string; // 设备中文名称
@@ -10,6 +10,7 @@ interface dataSourceItem {
   number?: number; // 数量
 }
 interface SketchMapType {
+  /** 数据源 */
   dataSource: dataSourceItem[];
   options?: {
     /** 语言 */
@@ -26,7 +27,7 @@ const getProjectSummary = (dataSource: dataSourceItem[]) => {
       return {
         name: item.name,
         equipment: item.equipment,
-        type: item.type
+        type: item.type,
       };
     });
   }
@@ -40,7 +41,7 @@ const getSubMeter = (dataSource: dataSourceItem[], subMeter: any[] = []) => {
       subMeter.push({
         name: item.name,
         equipment: item.equipment,
-        type: item.type
+        type: item.type,
       });
     }
     if (item.children) {
@@ -53,7 +54,7 @@ const getSubMeter = (dataSource: dataSourceItem[], subMeter: any[] = []) => {
 /** 虚拟子电表 分组数量 */
 const virtualSubMeter = ({
   data,
-  groupNumber = 4
+  groupNumber = 4,
 }: {
   data: dataSourceItem[];
   groupNumber?: number;
@@ -68,7 +69,7 @@ const virtualSubMeter = ({
       name: '虚拟电表',
       equipment: 'wattHourMeter',
       type: 'wattHourMeter',
-      children: data.slice(i, i + groupSize)
+      children: data.slice(i, i + groupSize),
     });
   }
   return groups;
@@ -78,7 +79,7 @@ const virtualSubMeter = ({
 const getRegionalEquipment = ({
   data,
   type,
-  result = []
+  result = [],
 }: {
   data: dataSourceItem[]; // 数据
   type?: string | undefined; // 父级当前数据类型
@@ -112,7 +113,7 @@ const getRegionalEquipment = ({
     if (item.children?.length && !result.length) {
       result = getRegionalEquipment({
         data: item.children,
-        type: item.type
+        type: item.type,
       });
     }
   }
@@ -126,16 +127,16 @@ const Equipment: FC<{
   className?: string;
 }> = ({ type, name, className = '' }) => {
   const wattHourMeter: boolean = ['summaryTable', 'wattHourMeter'].includes(
-    type
+    type,
   );
   return (
     <div
       className={classNames(
         {
-          'watt-hour-meter-comp': wattHourMeter
+          'watt-hour-meter-comp': wattHourMeter,
         },
         'flex',
-        className
+        className,
       )}
     >
       <div className="equipment__icon flex justify-center items-center">
@@ -186,18 +187,18 @@ const QkSketchMap: FC<SketchMapType> = ({ dataSource, options = {} }) => {
   const [subMeter, setSubMeter] = useState<dataSourceItem[]>([]);
   /** 获取区域设备 */
   const [regionalEquipment, setRegionalEquipment] = useState<dataSourceItem[]>(
-    []
+    [],
   );
   /** 语言字典 */
   const languageDictionary = {
     cn: {
       wattHourMeter: '电表',
-      region: '光伏区域'
+      region: '光伏区域',
     },
     en: {
       wattHourMeter: 'Electric Meter',
-      region: 'Region of Solar'
-    }
+      region: 'Region of Solar',
+    },
   };
   useEffect(() => {
     setProjectSummary(getProjectSummary(dataSource));
@@ -212,7 +213,7 @@ const QkSketchMap: FC<SketchMapType> = ({ dataSource, options = {} }) => {
           'has-project-summary': projectSummary.length,
           'not-sub-meter': !subMeter.length,
           'not-regional-equipment': !regionalEquipment.length,
-          'sub-meter-number-1': subMeter.length === 1
+          'sub-meter-number-1': subMeter.length === 1,
         })}
       >
         <div className="pv-diagram-warp flex flex-row">
@@ -247,7 +248,7 @@ const QkSketchMap: FC<SketchMapType> = ({ dataSource, options = {} }) => {
                         <Equipment
                           className={classNames({
                             'watt-hour-meter-comp__line':
-                              index !== 0 && index !== subMeter.length - 1
+                              index !== 0 && index !== subMeter.length - 1,
                           })}
                           type={item.type}
                           name={item.name}

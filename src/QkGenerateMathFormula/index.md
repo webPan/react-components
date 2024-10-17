@@ -3,6 +3,7 @@
 - 手写数学公式的实现
 - 支持无极上标 无极下标、上划线、下划线、求和
 
+## 示例
 ```tsx
 /**
  * title: 数学公式-手写
@@ -38,4 +39,15 @@ const Example = ()=>{
 }
 
 export default Example
+```
+
+## 目前支持的语法
+```ts
+enum Tags {
+  "_" = "sub",
+  "^" = "sup",
+  "\\underline" = "underline",
+  "\\overline" = "overline",
+  "\\sum" = "sum"
+}
 ```

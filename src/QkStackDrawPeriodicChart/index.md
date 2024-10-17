@@ -9,6 +9,7 @@
 - X 轴 时间
 - Y 轴 发电量
 
+## 示例
 ```tsx
 /**
  * title: 堆叠周期图
@@ -148,4 +149,64 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+
+```ts
+export type DataItem = {
+  name?: string;
+  start: string;
+  end: string;
+  columns: {
+    title: string;
+    value: number;
+    color: string;
+    background: string;
+  }[];
+  font?: { color?: string; size?: number };
+  color?: string;
+  [key: string]: any;
+};
+
+interface QkStackDrawPeriodicChartType {
+  /** 数据 */
+  data: DataItem[];
+  options?: {
+    width?: number;
+    height?: number;
+    background?: string; //背景色
+    margin?:
+      | {
+          left?: number;
+          top?: number;
+          right?: number;
+          bottom?: number;
+        }
+      | number; //间距
+    //长条信息
+    strip?: {
+      height?: number; //高度
+      margin?: number;
+    };
+    tickLineWidth?: number; //刻度长度
+    xAxios?: {
+      show?: boolean;
+      nameTextStyle?: {
+        color?: string;
+        fontSize?: number;
+      };
+      nameRender?: ((date: string, index: number) => string) | null | undefined;
+    };
+    yAxios?: {
+      show?: boolean;
+      width?: number; //Y轴展示的宽度
+      nameTextStyle?: {
+        color?: string;
+        fontSize?: number;
+      };
+    };
+    [key: string]: any;
+  };
+}
 ```

@@ -1,8 +1,7 @@
 # 自定义标签
+> 多个自定义标签Tag平铺，可控制行数
 
-- 自动获取 tag 的宽度，实现自适应
-- 可控制 tag 行数
-
+## 示例
 ```tsx
 import { QkCustomTags } from 'react-components';
 import React, { useState } from 'react';
@@ -74,3 +73,17 @@ const Example = () => {
 
 export default Example;
 ```
+
+## API
+
+| 属性名              | 类型                                           | 描述                          |
+|-------------------|----------------------------------------------|-----------------------------|
+| `data`            | `string[]`                                   | 数据源                         |
+| `gap`             | `number` (可选)                             | 标签之间的宽度                     |
+| `reservedWidth`   | `number` (可选)                             | 预留宽度                        |
+| `itemStyle`       | `CSSProperties` (可选)                      | 标签的样式控制                     |
+| `rows`            | `number` (可选)                             | 行数                          |
+| `moreRender`      |  (可选) | 更多自定义渲染                     |
+| `moreText`        | `string` (可选)                             | 等多文案修改                      |
+| `onLoadingCompleted` | `({ isMore }: { isMore: boolean }) => void` (可选) | 加载完成事件                      |
+

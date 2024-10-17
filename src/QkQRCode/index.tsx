@@ -1,26 +1,38 @@
-import './index.less';
-import QRCode from 'qrcode.react';
-import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react';
-import NOT_DATA from './images/icon-not-data.png';
-import { Button } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import { produce } from 'immer';
-import html2canvas from 'html2canvas';
-import ReactDOM from 'react-dom';
+import { Button } from 'antd';
 import classNames from 'classnames';
+import html2canvas from 'html2canvas';
+import { produce } from 'immer';
+import QRCode from 'qrcode.react';
+import { CSSProperties, useLayoutEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+import NOT_DATA from './images/icon-not-data.png';
+import './index.less';
 
 type QkQRCodeType = {
+  /** 二维码内容 */
   content: string;
+  /** 二维码宽度 */
   width?: number;
+  /** 二维码标题 */
   title?: string;
+  /** 二维码内容是否可编辑 */
   edit?: boolean;
+  /** 需要编辑的内容 */
   value?: string;
+  /** 二维码外边距 */
   margin?: number;
+  /** 是否默认开启截图 */
   screenshot?: boolean;
+  /** 输入文字长度限制 */
   titleLen?: number;
+  /** 编辑完成事件 */
   finish?: (data: string) => void;
+  /** 是否支持二维码下载 */
   download?: (() => void) | null;
+  /** 二维码标题编辑框onChange事件 */
   onChange?: ((value: string) => void) | null;
+  /** 截图完成回调 */
   success?: (data: string) => void;
 };
 const QkQRCode = (props: QkQRCodeType) => {
@@ -36,11 +48,11 @@ const QkQRCode = (props: QkQRCodeType) => {
     onChange = (data) => 0,
     success = (data) => 0,
     finish = (data) => 0,
-    titleLen = 20
+    titleLen = 20,
   } = props;
   const screenshotRef = useRef<HTMLDivElement>(null);
   const [qrCode, setQrCode] = useState({
-    edit: false
+    edit: false,
   });
   const inputRef = useRef<HTMLTextAreaElement>(null);
   /** 根据二维码宽度计算文字大小，比率是 15 */
@@ -54,7 +66,7 @@ const QkQRCode = (props: QkQRCodeType) => {
             return true;
           }
           return false;
-        }
+        },
       })
         .then((canvas) => {
           resolve(canvas.toDataURL('image/png'));
@@ -89,7 +101,7 @@ const QkQRCode = (props: QkQRCodeType) => {
         {
           width: width - margin + 'px',
           '--fontSize': fontSize + 'px',
-          '--margin': margin + 'px'
+          '--margin': margin + 'px',
         } as CSSProperties
       }
     >
@@ -100,12 +112,12 @@ const QkQRCode = (props: QkQRCodeType) => {
           style={{
             padding: margin + 'px',
             background: '#fff',
-            borderRadius: '8px'
+            borderRadius: '8px',
           }}
         />
         <p
           className={classNames('qk-qr-code__title', {
-            'qk-qr-code__title-margin': value || title
+            'qk-qr-code__title-margin': value || title,
           })}
         >
           {qrCode.edit && (
@@ -124,7 +136,7 @@ const QkQRCode = (props: QkQRCodeType) => {
                 setQrCode(
                   produce((draft) => {
                     draft.edit = false;
-                  })
+                  }),
                 );
               }}
             />
@@ -136,7 +148,7 @@ const QkQRCode = (props: QkQRCodeType) => {
                 setQrCode(
                   produce((draft) => {
                     draft.edit = true;
-                  })
+                  }),
                 );
                 setTimeout(() => {
                   const len = inputRef.current?.value.length || 0;
@@ -176,7 +188,7 @@ const screenshot = (props: QkQRCodeType) => {
     destroy: () => {
       ReactDOM.unmountComponentAtNode(DIV);
       document.body.removeChild(DIV);
-    }
+    },
   };
 };
 

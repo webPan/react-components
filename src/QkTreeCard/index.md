@@ -5,6 +5,8 @@
 - 支持异步加载及全量加载
 - 内部数据，可再外部随意修改
 
+## 示例
+
 ```tsx
 import { Button, Typography } from 'antd';
 import React from 'react';
@@ -76,4 +78,51 @@ const Index: React.FC = () => {
 };
 
 export default Index;
+```
+## API
+```ts
+
+export type QkTreeCardType = {
+  /**
+   * params的值更新时会触发重新生成tree
+   */
+  params?: Record<string, any>;
+  /** 外层类名 */
+  className?: string;
+  /** 异步加载数据 */
+  request: (
+    data?: { isRootTree?: boolean } & Record<string, any>,
+  ) => Promise<any>;
+  /** 数据源 */
+  treeData?: Record<string, any>[];
+  /** 卡片宽度 */
+  width?: number;
+  /** 卡片高度 */
+  height?: number;
+  /** 连线颜色 */
+  lineColor?: string;
+  /** 卡片样式 */
+  cardStyle?: CSSProperties;
+  /** 是否自动探测下一层数据 */
+  isLoadNextChildren?: boolean;
+  /** 组件递归内部用 */
+  children?: (
+    data: Record<string, any>,
+    methods?: MethodsType,
+  ) => React.ReactNode;
+  /** 没有数据时渲染的UI */
+  emptyRender?: React.ReactNode;
+} & Partial<
+  Pick<
+    QkCardType,
+    | 'onTreeChange'
+    | 'filter'
+    | 'treeKey'
+    | 'updateTree'
+    | 'data'
+    | 'tree'
+    | 'setTree'
+    | 'extraRender'
+  >
+>;
 ```

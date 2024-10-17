@@ -3,6 +3,7 @@
 - 基于 fabric.js 写的图表
 - 以时间为维度的时间周期图表
 
+## 示例
 ```tsx
 /**
  * title: 周期图
@@ -83,4 +84,70 @@ const Example = () => {
   );
 };
 export default Example;
+```
+
+## API
+```ts
+
+interface DataItem {
+  id: string;
+  name: string;
+  start: string;
+  end: string;
+  font?: {
+    color?: string;
+    size?: number;
+  };
+  background?: string;
+}
+interface DrawPeriodicChartType {
+  /** 数据 */
+  data: DataItem[];
+  options?: {
+    diyDrawXaxios?: boolean;
+    width?: number;
+    height?: number;
+    background?: string; // 背景色
+    margin?:
+      | number
+      | {
+          top?: number;
+          right?: number;
+          bottom?: number;
+          left?: number;
+        }; // 间距
+    // 长条信息
+    strip?: {
+      height?: number; // 高度
+      margin?: number; // 间距
+      onMouseout?: (stripCanvas: any) => any; // 鼠标经过
+      onMouseover?: (stripCanvas: any) => any; // 鼠标离开
+    };
+    xAxios?: {
+      show?: boolean;
+      width?: number;
+      nameTextStyle?: {
+        color?: string;
+        fontSize?: number;
+      };
+      nameRender?: (date: string, index: number) => string;
+    };
+    yAxios?: {
+      onMouseout?: (stripCanvas: any) => any; // 鼠标经过
+      onMouseover?: (stripCanvas: any) => any; // 鼠标离开
+      onClick?: (data: DataItem[]) => any;
+      labelWidth?: number;
+      height?: number; // 刻度高度
+      show?: boolean;
+      width?: number; // Y轴展示的宽度
+      nameTextStyle?: {
+        color?: string;
+        fontSize?: number;
+        underline?: boolean;
+      };
+      showToolTip?: boolean; // 是否显示tooltip
+    };
+    [key: string]: any;
+  };
+}
 ```

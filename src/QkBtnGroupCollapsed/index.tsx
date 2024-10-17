@@ -4,14 +4,15 @@ import React from 'react';
 
 /** 按钮展开 收起 */
 type QkBtnGroupCollapsedType = {
+  /** 数据源 */
   data: {
-    label: string;
-    key: string | number;
-    collapsed?: boolean;
-    show?: boolean;
-    disabled?: boolean;
+    label: string; //按钮文字
+    key: string | number; //key
+    collapsed?: boolean; //石佛折叠
+    show?: boolean; //是否显示
+    disabled?: boolean; //是否禁用
   }[];
-  onClick?: (value: string) => void;
+  onClick?: (value: string) => void; //点击事件
 };
 const QkBtnGroupCollapsed: React.FC<QkBtnGroupCollapsedType> = ({
   data,

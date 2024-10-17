@@ -3,6 +3,7 @@
 - 基于 antd Image 二次封装
 - 支持以 JS 方式在任意位置调用
 
+## 示例
 ```tsx
 import { QkImagePreview } from 'react-components';
 import { Button, Typography } from 'antd';
@@ -28,4 +29,12 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+```ts
+type QkImagePreviewType = {
+  src: string; //图片地址
+  onCancel?: () => void; //关闭预览回调
+};
 ```

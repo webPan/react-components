@@ -8,7 +8,7 @@
 - H 水力发电
 - X 轴 时间
 - Y 轴 发电量
-
+## 示例
 ```tsx
 /**
  * title: 面积周期图
@@ -70,4 +70,78 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+
+```ts
+
+interface Column {
+  background: string; //背景颜色
+  color: string; //文字颜色
+  list: { title: string; value: number }[];
+}
+
+interface DataItem {
+  name?: string; //名字
+  start: string; //起始时间
+  end: string; //结束时间
+  //各行数据
+  columns: {
+    w?: Column;
+    s?: Column;
+    h?: Column;
+    [key: string]: Column | undefined; // 添加额外的索引签名
+  };
+  [key: string]: any;
+}
+
+interface QkAreaDrawPeriodicChartType {
+  /** 数据 */
+  data: DataItem[]; //数据源
+  options?: {
+    width?: number; //宽度
+    height?: number; //高度
+    background?: string; //背景色
+    //上下左右间隙
+    margin?:
+      | {
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+        }
+      | number; //间距
+    //长条信息
+    strip?: {
+      width?: number; //宽度
+      margin?: number; //间距
+      radius?: number; //圆角
+      minHeight?: number; // 最小高度
+    };
+    //X轴配置
+    xAxios?: {
+      show?: boolean; //是否显示X轴
+      //X轴文字样式
+      nameTextStyle?: {
+        color?: string; //文字颜色
+        fontSize?: number; //文字大小
+      };
+      //自定义X轴内容
+      nameRender?: (date: Date, index: number) => string | null;
+    };
+    //Y轴配置
+    yAxios?: {
+      height?: number; //刻度高度
+      show?: boolean; //是否显示Y轴
+      width?: number; //Y轴展示的宽度
+      //Y轴文字样式
+      nameTextStyle?: {
+        color?: string; //文字颜色
+        fontSize?: number; //字体大小
+      };
+    };
+    [key: string]: any;
+  };
+}
 ```

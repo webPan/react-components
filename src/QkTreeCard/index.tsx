@@ -1,17 +1,17 @@
+import { useUpdateEffect } from 'ahooks';
+import classNames from 'classnames';
 import React, {
+  CSSProperties,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
-  useEffect,
-  CSSProperties
 } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './index.less';
-import classNames from 'classnames';
-import { useUpdateEffect } from 'ahooks';
 
-import Icon from './Icon';
 import { message } from 'antd';
+import Icon from './Icon';
 
 /**
  * 递归过滤 命中当前数据，则保留父级及子集，过滤兄弟集
@@ -30,7 +30,7 @@ interface TreeNode {
 
 const filterTree = ({
   data,
-  filter
+  filter,
 }: {
   data: TreeNode[];
   filter: Filter[];
@@ -49,13 +49,13 @@ const filterTree = ({
           return nodeValue.some((val) => value.includes(val));
         }
         return nodeValue == value; // 非字符串使用精确匹配
-      })
+      }),
     );
   };
 
   const recursiveFilter = (
     nodes: TreeNode[],
-    isFirstLevel = true
+    isFirstLevel = true,
   ): TreeNode[] => {
     return nodes.map((node) => {
       const children = node.children
@@ -66,7 +66,7 @@ const filterTree = ({
       if (isFirstLevel) {
         return {
           ...node,
-          children: children.length ? children : undefined
+          children: children.length ? children : undefined,
         };
       }
 
@@ -76,7 +76,7 @@ const filterTree = ({
       return {
         ...node,
         isFilter: !isMatched, //&& !children.some((child) => !child.isFilter)
-        children: children.length ? children : undefined
+        children: children.length ? children : undefined,
       };
     });
   };
@@ -93,22 +93,30 @@ export type QkTreeCardType = {
    * params的值更新时会触发重新生成tree
    */
   params?: Record<string, any>;
+  /** 外层类名 */
   className?: string;
+  /** 异步加载数据 */
   request: (
-    data?: { isRootTree?: boolean } & Record<string, any>
+    data?: { isRootTree?: boolean } & Record<string, any>,
   ) => Promise<any>;
+  /** 数据源 */
   treeData?: Record<string, any>[];
+  /** 卡片宽度 */
   width?: number;
+  /** 卡片高度 */
   height?: number;
-
+  /** 连线颜色 */
   lineColor?: string;
+  /** 卡片样式 */
   cardStyle?: CSSProperties;
   /** 是否自动探测下一层数据 */
   isLoadNextChildren?: boolean;
+  /** 组件递归内部用 */
   children?: (
     data: Record<string, any>,
-    methods?: MethodsType
+    methods?: MethodsType,
   ) => React.ReactNode;
+  /** 没有数据时渲染的UI */
   emptyRender?: React.ReactNode;
 } & Partial<
   Pick<
@@ -133,7 +141,7 @@ type QkCardType = {
   request: (data?: Record<string, any>) => Promise<any>;
   completedLoading?: ({
     width,
-    height
+    height,
   }: {
     width: number;
     height: number;
@@ -142,7 +150,7 @@ type QkCardType = {
   setTree: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
   extraRender?: (
     data: Record<string, any>,
-    methods: MethodsType
+    methods: MethodsType,
   ) => React.ReactNode;
   updateTree: React.MutableRefObject<Record<string, any>[]>;
   onTreeChange?: (data: Record<string, any>[]) => void;
@@ -156,7 +164,7 @@ const updateTreeData = ({
   key,
   treeKey = 'key',
   dataSource,
-  updateRecord = {}
+  updateRecord = {},
 }: {
   treeKey: string;
   key: string;
@@ -167,7 +175,7 @@ const updateTreeData = ({
     if (node[treeKey] == key) {
       return {
         ...node,
-        ...updateRecord
+        ...updateRecord,
       };
     }
     if (node?.children?.length) {
@@ -177,8 +185,8 @@ const updateTreeData = ({
           key,
           treeKey,
           dataSource: node.children,
-          updateRecord
-        })
+          updateRecord,
+        }),
       };
     }
     return node;
@@ -188,7 +196,7 @@ const updateTreeData = ({
 export const formatTree = ({
   tree = [],
   key = 'key',
-  reset = false
+  reset = false,
 }: {
   tree: Record<string, any>[];
   key?: string;
@@ -204,13 +212,13 @@ export const formatTree = ({
       ...node,
       key: node[key],
       isOpen: reset ? false : isOpen,
-      opened: true
+      opened: true,
     };
     if (Array.isArray(children) && children.length > 0) {
       formattedNode.children = formatTree({
         tree: children,
         key,
-        reset
+        reset,
       });
     }
     return formattedNode;
@@ -220,7 +228,7 @@ enum BTN_STATE {
   LOADING,
   OPEN,
   CLOSE,
-  HIDE
+  HIDE,
 }
 const QkCard: React.FC<QkCardType> = ({
   isLoadNextChildren = false,
@@ -232,11 +240,11 @@ const QkCard: React.FC<QkCardType> = ({
   cardStyle,
   updateTree,
   onTreeChange,
-  treeKey = 'key'
+  treeKey = 'key',
 }) => {
   //是否有下一级
   const [btnState, setBtnState] = useState<BTN_STATE>(
-    isLoadNextChildren ? BTN_STATE.LOADING : BTN_STATE.CLOSE
+    isLoadNextChildren ? BTN_STATE.LOADING : BTN_STATE.CLOSE,
   );
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -250,13 +258,13 @@ const QkCard: React.FC<QkCardType> = ({
   const methods: MethodsType = {
     setRecord: (key, record) => {
       handleOpenAndClose({ key, record });
-    }
+    },
   };
   //点击展开收取
   const handleOpenAndClose = async ({
     key,
     record = {},
-    opened = true
+    opened = true,
   }: {
     key: string;
     record?: Record<string, any>;
@@ -299,8 +307,8 @@ const QkCard: React.FC<QkCardType> = ({
         isOpen: !opened ? false : currentState === BTN_STATE.OPEN,
         opened,
         children,
-        ...record
-      }
+        ...record,
+      },
     });
     setTree(updateTree.current);
     if (updateTree.current?.length === 1) {
@@ -345,8 +353,8 @@ const QkCard: React.FC<QkCardType> = ({
             'btn-open': btnState == BTN_STATE.CLOSE,
             'btn-close': btnState == BTN_STATE.OPEN,
             'btn-loading': btnState == BTN_STATE.LOADING,
-            invisible: btnState === BTN_STATE.HIDE
-          }
+            invisible: btnState === BTN_STATE.HIDE,
+          },
         )}
         onClick={() => {
           handleOpenAndClose({ key: data[treeKey], opened: true });
@@ -372,7 +380,7 @@ const QkTreeCard: React.FC<QkTreeCardType> = ({
   filter,
   tree,
   setTree,
-  updateTree
+  updateTree,
 }) => {
   if (!updateTree || !setTree) return;
   const filterExistTree = (data: Record<string, any>) =>
@@ -385,7 +393,7 @@ const QkTreeCard: React.FC<QkTreeCardType> = ({
             key={item[treeKey]}
             className={classNames(
               'qk-tree-card-column flex',
-              'qk-tree-card-column-' + tree.filter(filterExistTree).length
+              'qk-tree-card-column-' + tree.filter(filterExistTree).length,
             )}
           >
             <QkCard
@@ -449,7 +457,7 @@ const QkTreeCardWrap: React.FC<QkTreeCardType> = (props) => {
     isLoadNextChildren = false,
     emptyRender,
     onTreeChange,
-    filter
+    filter,
   } = props;
   const updateTree = useRef<Record<string, any>[]>([]);
   const [tree, setTree] = useState<Record<string, any>[]>([]);
@@ -464,7 +472,7 @@ const QkTreeCardWrap: React.FC<QkTreeCardType> = (props) => {
     if (filter) {
       const result = filterTree({
         data: updateTree.current,
-        filter // 转换为数组
+        filter, // 转换为数组
       });
       /** 特殊处理，后续再改 */
       const existTree = result[0]?.children.filter(filterExistTree);
@@ -479,12 +487,12 @@ const QkTreeCardWrap: React.FC<QkTreeCardType> = (props) => {
     !treeData?.length &&
       request({
         params,
-        isRootTree: true
+        isRootTree: true,
       }).then((result = []) => {
         const dataList = formatTree({
           tree: result,
           key: treeKey,
-          reset: true
+          reset: true,
         });
         updateTree.current = dataList;
         // 生成根节点 也要掉用下onTreeChange
@@ -506,7 +514,7 @@ const QkTreeCardWrap: React.FC<QkTreeCardType> = (props) => {
         {
           '--w': width + 'px',
           '--h': height + 'px',
-          '--line-color': lineColor
+          '--line-color': lineColor,
         } as CSSProperties
       }
       className={classNames(className)}

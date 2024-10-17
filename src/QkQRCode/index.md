@@ -5,6 +5,8 @@
 - 二维码生成带标题
 - 支持自定义尺寸的二维码下载
 
+## 示例
+
 ```tsx
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
@@ -78,4 +80,35 @@ const Example = () => {
   );
 };
 export default Example;
+```
+
+## API
+
+```ts
+type QkQRCodeType = {
+  /** 二维码内容 */
+  content: string;
+  /** 二维码宽度 */
+  width?: number;
+  /** 二维码标题 */
+  title?: string;
+  /** 二维码内容是否可编辑 */
+  edit?: boolean;
+  /** 需要编辑的内容 */
+  value?: string;
+  /** 二维码外边距 */
+  margin?: number;
+  /** 是否默认开启截图 */
+  screenshot?: boolean;
+  /** 输入文字长度限制 */
+  titleLen?: number;
+  /** 编辑完成事件 */
+  finish?: (data: string) => void;
+  /** 是否支持二维码下载 */
+  download?: (() => void) | null;
+  /** 二维码标题编辑框onChange事件 */
+  onChange?: ((value: string) => void) | null;
+  /** 截图完成回调 */
+  success?: (data: string) => void;
+};
 ```

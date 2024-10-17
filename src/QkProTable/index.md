@@ -6,6 +6,7 @@
 - 增加翻页记忆及搜索条件记忆功能
 - 增加表格各项宽度自适应功能
 
+## 示例
 ```tsx
 import { QkProTable } from 'react-components';
 import { type ProColumns } from '@ant-design/pro-components';
@@ -98,4 +99,14 @@ const Example = () => {
 };
 
 export default Example;
+```
+
+## API
+```ts
+type QkProTableType = Omit<ProTableProps<any, any>, 'search'> & {
+  ellipsis?: boolean; //快捷开启ellipsis
+  search?: {
+    storeQueryParams?: boolean; //是否缓存搜索参数
+  } & Pick<ProTableProps<any, any>, 'search'>['search'];
+};
 ```

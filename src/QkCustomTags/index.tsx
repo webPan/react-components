@@ -1,12 +1,12 @@
+import classNames from 'classnames';
 import React, {
   CSSProperties,
   useEffect,
   useLayoutEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import styles from './index.module.less';
-import classNames from 'classnames';
 
 /**
  * 1. 计算每个ITEM元素的宽度，存储后面用
@@ -34,7 +34,7 @@ const useTags = ({ rows, gap }: { rows: number; gap: number }) => {
       value,
       render: true,
       width: 0,
-      key: Math.random().toString()
+      key: Math.random().toString(),
     }));
   };
   /** 根据rows计算到底能放下多少ITEMS */
@@ -80,19 +80,19 @@ const useTags = ({ rows, gap }: { rows: number; gap: number }) => {
     widthBackfilling,
     setContainerWidth,
     setMoreWidth,
-    setDataList
+    setDataList,
   };
 };
 
 type QkCustomTagsType = {
-  data: string[];
-  gap?: number;
+  data: string[]; //数据源
+  gap?: number; //标签之间的宽度
   reservedWidth?: number; //预留宽度
-  itemStyle?: CSSProperties;
-  rows?: number;
-  moreRender?: ((len?: number) => React.ReactNode) | boolean;
-  moreText?: string;
-  onLoadingCompleted?: ({ isMore }: { isMore: boolean }) => void;
+  itemStyle?: CSSProperties; //标签之间的宽度控制
+  rows?: number; //行数
+  moreRender?: ((len?: number) => React.ReactNode) | boolean; //更多自定义渲染
+  moreText?: string; //等多文案修改
+  onLoadingCompleted?: ({ isMore }: { isMore: boolean }) => void; //加载完成时间
 };
 
 type QkCustomTagsItemType = {
@@ -105,7 +105,7 @@ type QkCustomTagsItemType = {
 const QkCustomTagsItem: React.FC<QkCustomTagsItemType> = ({
   value,
   onLoadingCompleted,
-  itemStyle
+  itemStyle,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   useLayoutEffect(() => {
@@ -125,7 +125,7 @@ const QkCustomTags: React.FC<QkCustomTagsType> = ({
   rows = 1,
   moreRender = true,
   moreText = '更多',
-  onLoadingCompleted
+  onLoadingCompleted,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -135,10 +135,10 @@ const QkCustomTags: React.FC<QkCustomTagsType> = ({
     widthBackfilling,
     setContainerWidth,
     setMoreWidth,
-    setDataList
+    setDataList,
   } = useTags({
     rows,
-    gap
+    gap,
   });
   useLayoutEffect(() => {
     setContainerWidth(ref.current?.offsetWidth || 0);
@@ -155,7 +155,7 @@ const QkCustomTags: React.FC<QkCustomTagsType> = ({
     <div
       className={classNames(
         'flex flex-auto flex-wrap',
-        styles['qk-custom-tags']
+        styles['qk-custom-tags'],
       )}
       ref={ref}
       style={{ gap: gap + 'px' }}

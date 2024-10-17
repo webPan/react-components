@@ -9,9 +9,9 @@ import { replaceState } from 'react-components';
 import { formatColumns, formatDataSource } from './utils';
 
 type QkProTableType = Omit<ProTableProps<any, any>, 'search'> & {
-  ellipsis?: boolean;
+  ellipsis?: boolean; //快捷开启ellipsis
   search?: {
-    storeQueryParams?: boolean;
+    storeQueryParams?: boolean; //是否缓存搜索参数
   } & Pick<ProTableProps<any, any>, 'search'>['search'];
 };
 //额外工具
