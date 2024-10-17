@@ -1,9 +1,10 @@
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  outputPath: 'docs-dist',
+  outputPath: 'docs',
   themeConfig: {
     name: 'react',
     nav: [{ title: '组件库', link: '/components' }],
+    docDirs: 'md',
   },
 });
