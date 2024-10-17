@@ -1,10 +1,19 @@
 # 面积周期图
 
+> 基于 fabric.js 时间周期图表
+
+- 支持宽度自适应
+- W 风力发电
+- S 光伏发电
+- H 水力发电
+- X 轴 时间
+- Y 轴 发电量
+
 ```tsx
 /**
  * title: 面积周期图
  * */
-import {QkAreaDrawPeriodicChart} from 'react-components';
+import { QkAreaDrawPeriodicChart } from 'react-components';
 import { Typography } from 'antd';
 import React from 'react';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -16,24 +25,24 @@ const data = [
       w: {
         background: '#A6E9F5',
         color: '#017297',
-        list: [{ title: 'W1', value: 1350.0 }]
+        list: [{ title: 'W1', value: 1350.0 }],
       },
       s: {
         background: '#C7D0D9',
         color: '#2F383D',
-        list: [{ title: 'S1', value: 11.0 }]
+        list: [{ title: 'S1', value: 11.0 }],
       },
       h: {
         background: '#99C5EE',
         color: '#1973CB',
         list: [
           { title: 'H1', value: 12345.0 },
-          { title: 'H2', value: 4569.022122 }
-        ]
-      }
+          { title: 'H2', value: 4569.022122 },
+        ],
+      },
     },
     period: ['2023-01-01', '2023-01-31'],
-    total: 18275.02
+    total: 18275.02,
   },
   {
     start: '2023-03-10',
@@ -42,24 +51,16 @@ const data = [
       s: {
         background: '#C7D0D9',
         color: '#2F383D',
-        list: [{ title: 'S2', value: 4000.0 }]
-      }
+        list: [{ title: 'S2', value: 4000.0 }],
+      },
     },
-    total: 4000
-  }
+    total: 4000,
+  },
 ];
 
 const Example = () => {
   return (
     <div>
-      <Typography>
-        <Title>QkAreaDrawPeriodicChart 组件</Title>
-        <Paragraph>
-          <ul>
-            <li>以时间为维度的时间周期图</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <QkAreaDrawPeriodicChart
         data={data}
         options={{ height: 400, yAxios: { width: 60 } }}
@@ -69,5 +70,4 @@ const Example = () => {
 };
 
 export default Example;
-
 ```

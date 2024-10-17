@@ -1,5 +1,10 @@
 # 树型卡片
 
+- 树形卡片,无限层级
+- 可自动探测下一层级是否有子节点
+- 支持异步加载及全量加载
+- 内部数据，可再外部随意修改
+
 ```tsx
 import { Button, Typography } from 'antd';
 import React from 'react';
@@ -39,17 +44,6 @@ const Index: React.FC = () => {
 
   return (
     <div>
-      <Typography>
-        <Title>QkTreeCard</Title>
-        <Paragraph>
-          <ul>
-            <li>树形卡片,无限层级</li>
-            <li>可自动探测下一层级是否有子节点</li>
-            <li>支持异步加载及全量加载</li>
-            <li>内部数据，可再外部随意修改</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <div style={{ width: '100%', height: '500px', overflow: 'auto' }}>
         <QkTreeCard
           className="test"
@@ -82,5 +76,4 @@ const Index: React.FC = () => {
 };
 
 export default Index;
-
 ```

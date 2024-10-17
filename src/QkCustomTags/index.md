@@ -1,7 +1,10 @@
 # 自定义标签
 
+- 自动获取 tag 的宽度，实现自适应
+- 可控制 tag 行数
+
 ```tsx
-import {QkCustomTags} from 'react-components';
+import { QkCustomTags } from 'react-components';
 import React, { useState } from 'react';
 import { Button, Space, Typography } from 'antd';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -16,19 +19,10 @@ const Example = () => {
     '时尚大方14',
     '时尚大方时尚大方15',
     '时尚大方16',
-    '时尚大方17'
+    '时尚大方17',
   ]);
   return (
     <div>
-      <Typography>
-        <Title>QkCustomTags 组件</Title>
-        <Paragraph>
-          <ul>
-            <li>自动获取tag的宽度，实现自适应</li>
-            <li>可控制tag行数</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <Space className="mb-[10px]">
         <Button
           onClick={() => {
@@ -49,7 +43,7 @@ const Example = () => {
               '时尚大方14',
               '时尚大方时尚大方15',
               '时尚大方16',
-              '时尚大方17'
+              '时尚大方17',
             ]);
           }}
         >

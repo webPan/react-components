@@ -7,5 +7,6 @@ module.exports = {
     'guard-for-in': 0,
     'no-promise-executor-return': 0,
     'react-hooks/rules-of-hooks': 0,
+    'no-param-reassign': 0,
   },
 };

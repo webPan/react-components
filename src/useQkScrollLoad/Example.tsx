@@ -1,9 +1,9 @@
 /**
  * title: 组件懒加载
  * */
+
 import { Typography } from 'antd';
 import classNames from 'classnames';
-import React from 'react';
 import { useQkScrollLoad } from 'react-components';
 
 const { Title, Paragraph } = Typography;

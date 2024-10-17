@@ -1,7 +1,11 @@
-# 自定义Modal
+# 自定义 Modal
+
+- 自定义弹框组件
+- 可当作组件用
+- 也可通过 js 在任意位置调用改组件
 
 ```tsx
-import {QkCustomModal} from 'react-components';
+import { QkCustomModal } from 'react-components';
 import React, { useState } from 'react';
 import { Button, Space, Typography } from 'antd';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -10,16 +14,6 @@ const Example = () => {
   const [visible, setVisible] = useState(false);
   return (
     <div>
-      <Typography>
-        <Title>QkCustomModal 组件</Title>
-        <Paragraph>
-          <ul>
-            <li>自定义弹框组件</li>
-            <li>可当作组件用</li>
-            <li>也可通过js在任意位置调用改组件</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <Space>
         <Button
           onClick={() => {
@@ -38,7 +32,7 @@ const Example = () => {
               },
               onCancel: () => {
                 handleModal.destroy();
-              }
+              },
             });
           }}
         >
@@ -59,5 +53,4 @@ const Example = () => {
 };
 
 export default Example;
-
 ```

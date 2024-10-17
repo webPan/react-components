@@ -1,5 +1,9 @@
 # 组件懒加载
 
+- React 中一切皆组件
+- 利用 IntersectionObserver 实现懒加载方案
+- 支持自定义组件渲染时机，包括（时间、可视区域距离）
+
 ```tsx
 /**
  * title: 组件懒加载
@@ -19,15 +23,6 @@ const Example = () => {
   });
   return (
     <div>
-      <Typography>
-        <Title>QkScrollLoad 组件懒加载</Title>
-        <Paragraph>
-          <ul>
-            <li>React中一切皆组件</li>
-            <li>利用IntersectionObserver实现懒加载方案</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <QkScrollLoad>
         {(visible) => {
           console.log(visible + '三');

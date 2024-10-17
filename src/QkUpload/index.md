@@ -1,4 +1,8 @@
 # 自定义文件上传
+
+- 主要是基于 antd Upload 定制的文件上传
+- 当文件数量大于两行时自动文件信息折叠
+
 ```tsx
 import { message, Typography, Upload } from 'antd';
 import { type UploadProps } from 'antd/es/upload';
@@ -62,14 +66,6 @@ const Example: React.FC = () => {
   };
   return (
     <div className="p-5 border-solid border-black border m-auto bg-white">
-      <Typography>
-        <Title>QkUpload</Title>
-        <Paragraph>
-          <ul>
-            <li>主要是基于antd Upload 定制的文件上传</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <QkUpload
         title={'设备申报登记表'}
         placeholder="还没有上传其他类型文件"
@@ -143,5 +139,4 @@ const Example: React.FC = () => {
 };
 
 export default Example;
-
 ```

@@ -1,5 +1,10 @@
 # 二维码扫描
 
+> 基于 qrcode.react 、html2canvas 生成的二维码和二维码下载
+
+- 二维码生成带标题
+- 支持自定义尺寸的二维码下载
+
 ```tsx
 import { Button, Space, Typography } from 'antd';
 import React from 'react';
@@ -9,15 +14,6 @@ const { Title, Paragraph, Text, Link } = Typography;
 const Example = () => {
   return (
     <div>
-      <Typography>
-        <Title>QkQRCode</Title>
-        <Paragraph>
-          <ul>
-            <li>二维码生成带标题</li>
-            <li>支持自定义尺寸的二维码下载</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <div>
         <QkQRCode
           content="http://www.baidu.com"
@@ -81,6 +77,5 @@ const Example = () => {
     </div>
   );
 };
-
 export default Example;
 ```

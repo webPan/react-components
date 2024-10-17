@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button, Dropdown, MenuProps, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, MenuProps, Space } from 'antd';
+import React from 'react';
 
 /** 按钮展开 收起 */
 type QkBtnGroupCollapsedType = {
@@ -15,7 +15,7 @@ type QkBtnGroupCollapsedType = {
 };
 const QkBtnGroupCollapsed: React.FC<QkBtnGroupCollapsedType> = ({
   data,
-  onClick
+  onClick,
 }) => {
   const collapsed: MenuProps['items'] = [];
   const expand: Record<string, any>[] = [];
@@ -37,7 +37,7 @@ const QkBtnGroupCollapsed: React.FC<QkBtnGroupCollapsedType> = ({
             type="link"
             key={item.key}
             onClick={() => {
-              if (typeof onClick == 'function') {
+              if (typeof onClick === 'function') {
                 onClick(item.key);
               }
             }}
@@ -52,10 +52,10 @@ const QkBtnGroupCollapsed: React.FC<QkBtnGroupCollapsedType> = ({
           menu={{
             items: collapsed,
             onClick: (event) => {
-              if (typeof onClick == 'function') {
+              if (typeof onClick === 'function') {
                 onClick(event.key);
               }
-            }
+            },
           }}
         >
           <Button type="link">

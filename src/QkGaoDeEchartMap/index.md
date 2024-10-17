@@ -1,7 +1,19 @@
-# 高德地图 Echat版本
+# 高德地图 Echat 版本
+
+- 基于 高德地图 二次封装，将高频使用的功能都写进了组件
+- 支持开启卫星地图
+- 支持开启标注点加载省名称
+- 支持开启各个省的边界线
+- 支持某个点的详细地址标注 tip
+- 支持海量点标注及动画效果
+- 支持海量点点击，自定义窗体
+- 支持按 ctrl+滚轮缩放地图
+- 支持某个区域绘制边界线
+- 支持定位并自动缩放级别
+- 支持多语言
 
 ```tsx
-import {QkGaoDeEchartMap} from 'react-components';
+import { QkGaoDeEchartMap } from 'react-components';
 import { Typography } from 'antd';
 import React from 'react';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -9,16 +21,6 @@ const { Title, Paragraph, Text, Link } = Typography;
 const Example = () => {
   return (
     <div>
-      <Typography>
-        <Title>QkGaoDeMap 组件</Title>
-        <Paragraph>
-          <ul>
-            <li>
-              基于 高德地图 二次封装，将高频使用的功能都写进了组件，使用接口启用
-            </li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <div style={{ height: '500px', position: 'relative' }}>
         <QkGaoDeEchartMap
           dataSource={[
@@ -28,30 +30,30 @@ const Example = () => {
               lngLat: [121.499427, 31.239772],
               id: 1,
               color: '#990123',
-              size: 12
-            }
+              size: 12,
+            },
           ]}
           AMapOptions={{
             center: [106.258754, 38.471317],
             zoomEnable: true, // 是否缩放
             dragEnable: true, // 是否拖动
-            showLabel: false
+            showLabel: false,
           }}
           mapZoomShortcut="ctrl+mousewheel"
           autoLocateScaleLevels={true}
           drawConnectLinesOptions={{
             color: {
               start: '#990123',
-              end: '#223234'
+              end: '#223234',
             },
             endPoints: [
               {
                 id: 2,
                 lngLat: [115.871364, 28.660997],
                 color: '#223234',
-                from: [[121.499427, 31.239772]]
-              }
-            ]
+                from: [[121.499427, 31.239772]],
+              },
+            ],
           }}
           completed={(gdMap) => {
             // console.log(assetsInfo.province)

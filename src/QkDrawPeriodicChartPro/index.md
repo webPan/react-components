@@ -1,9 +1,13 @@
 # 周期图
+
+- 基于 fabric.js 写的图表
+- 以时间为维度的时间周期图表
+
 ```tsx
 /**
  * title: 周期图
  * */
-import {QkDrawPeriodicChartPro} from 'react-components';
+import { QkDrawPeriodicChartPro } from 'react-components';
 import { Typography } from 'antd';
 import React from 'react';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -15,10 +19,10 @@ const data = [
     end: '2021-03-07',
     font: {
       color: '#fff',
-      size: 16
+      size: 16,
     },
     background: 'red',
-    id: '1'
+    id: '1',
   },
   {
     name: '222测试风力发电电站2测试风力发电电站2',
@@ -26,11 +30,11 @@ const data = [
     end: '2021-07-01',
     font: {
       color: '#fff',
-      size: 16
+      size: 16,
     },
     background: 'blue',
-    id: '2'
-  }
+    id: '2',
+  },
   // {
   //   name: "333测试光伏发电电站1",
   //   start: "2022/06/01",
@@ -69,18 +73,10 @@ const data = [
 const Example = () => {
   return (
     <div>
-      <Typography>
-        <Title>QkDrawPeriodicChartPro</Title>
-        <Paragraph>
-          <ul>
-            <li>以时间为维度的时间周期图表</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <QkDrawPeriodicChartPro
         data={data}
         options={{
-          width: 1190
+          width: 1190,
         }}
       />
     </div>

@@ -1,10 +1,10 @@
 ---
 hero:
   title: React
-  description: 祺鲲科技 - React组件库
+  description: React组件库
   actions:
-    - text: 概览
-      link: /
+    - text: Gitee
+      link: https://gitee.com/qing_321
     - text: 技术博客
       link: https://www.cnblogs.com/yz-blog
 features:

@@ -1,9 +1,19 @@
 # 堆叠周期图
+
+> 基于 fabric.js 时间周期图表
+
+- 支持宽度自适应
+- W 风力发电
+- S 光伏发电
+- H 水力发电
+- X 轴 时间
+- Y 轴 发电量
+
 ```tsx
 /**
  * title: 堆叠周期图
  * */
-import {QkStackDrawPeriodicChart} from 'react-components';
+import { QkStackDrawPeriodicChart } from 'react-components';
 import { Typography } from 'antd';
 import React from 'react';
 const { Title, Paragraph, Text, Link } = Typography;
@@ -16,12 +26,12 @@ const data = [
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 8, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' }
+      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' },
     ],
     font: {
       color: '#fff',
-      size: 14
-    }
+      size: 14,
+    },
   },
   {
     name: '2',
@@ -30,12 +40,12 @@ const data = [
     columns: [
       { title: 'W', value: 2, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 7, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' }
+      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' },
     ],
     font: {
       color: '#fff',
-      size: 14
-    }
+      size: 14,
+    },
   },
   {
     name: '3',
@@ -43,13 +53,13 @@ const data = [
     end: '2022-01-01',
     font: {
       color: '#fff',
-      size: 14
+      size: 14,
     },
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 5, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' }
-    ]
+      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' },
+    ],
   },
   {
     name: '4',
@@ -57,13 +67,13 @@ const data = [
     end: '2023-01-01',
     font: {
       color: '#fff',
-      size: 14
+      size: 14,
     },
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 5, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' }
-    ]
+      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' },
+    ],
   },
   {
     name: '5',
@@ -71,13 +81,13 @@ const data = [
     end: '2021-06-01',
     font: {
       color: '#fff',
-      size: 14
+      size: 14,
     },
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 3, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' }
-    ]
+      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' },
+    ],
   },
   {
     name: '5',
@@ -85,14 +95,14 @@ const data = [
     end: '2023-01-01',
     font: {
       color: '#fff',
-      size: 14
+      size: 14,
     },
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 3, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' }
-    ]
-  }
+      { title: 'H', value: 3, background: '#99C5EE', color: '#1973CB' },
+    ],
+  },
 ];
 
 const test = [
@@ -102,8 +112,8 @@ const test = [
     columns: [
       { title: 'W', value: 0, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 1, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' }
-    ]
+      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' },
+    ],
   },
   {
     start: '2023-01-01',
@@ -111,23 +121,14 @@ const test = [
     columns: [
       { title: 'W', value: 1, background: '#A6E9F5', color: '#017297' },
       { title: 'S', value: 0, background: '#C7D0D9', color: '#00000' },
-      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' }
-    ]
-  }
+      { title: 'H', value: 0, background: '#99C5EE', color: '#1973CB' },
+    ],
+  },
 ];
 
 const Example = () => {
   return (
     <div>
-      <Typography>
-        <Title>QkStackDrawPeriodicChart 时间周期图表</Title>
-        <Paragraph>
-          <ul>
-            <li>基于fabric.js以时间周期为维度的周期图表</li>
-            <li>支持宽度自适应</li>
-          </ul>
-        </Paragraph>
-      </Typography>
       <QkStackDrawPeriodicChart
         data={data}
         options={{
@@ -138,8 +139,8 @@ const Example = () => {
               return index % 2 === 0 || index === 0
                 ? date.replace(/-/g, '/')
                 : date.substring(5).replace(/-/g, '/');
-            }
-          }
+            },
+          },
         }}
       />
     </div>
@@ -147,5 +148,4 @@ const Example = () => {
 };
 
 export default Example;
-
 ```
