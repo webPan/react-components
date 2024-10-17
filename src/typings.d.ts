@@ -46,4 +46,5 @@ declare interface Window {
   ESG_WEB_HOST: string;
   TRANCE_SOURCE_HOST: string;
   COLLECTION_MONITOR_HOST: string;
+  AMap: Record<string, any>;
 }

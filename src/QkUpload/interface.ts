@@ -1,5 +1,5 @@
-import type React from 'react';
 import type { UploadFile } from 'antd/es/upload/interface';
+import type React from 'react';
 /** 文件上传组件 */
 export type QkUploadType = {
   /** 标题 */
@@ -7,7 +7,7 @@ export type QkUploadType = {
   /** 文件上传按钮render */
   uploadButtonRender?:
     | (({
-        onTriggerUpload
+        onTriggerUpload,
       }: {
         onTriggerUpload: () => void;
       }) => React.ReactNode)
@@ -38,7 +38,7 @@ export type QkUploadType = {
 };
 
 /** 文件附件列表 */
-type UploadFilePlus = UploadFile & {
+export type UploadFilePlus = UploadFile & {
   /** 时间 */
   time?: string;
   [x: string]: any;

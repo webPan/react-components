@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import React, { CSSProperties, useLayoutEffect, useRef } from 'react';
 import Delete from './../images/icon-delete.svg';
 import Download from './../images/icon-download.svg';
-import type { UploadFilePlus } from './../index.d';
+import type { UploadFilePlus } from './../interface';
 import { getFileType } from './../tools';
 
 /** 附件列表渲染 */
@@ -85,7 +85,7 @@ const AttachmentListItemRender = (
             </div>
           </div>
         </div>
-        {file.status == 'uploading' && (
+        {file.status === 'uploading' && (
           <div
             className="absolute upload-percent justify-center items-center flex w-full h-full left-0 top-0"
             style={{ '--percent': (file.percent || 0) + '%' } as CSSProperties}
@@ -98,7 +98,7 @@ const AttachmentListItemRender = (
           </div>
         )}
       </div>
-      {typeof attachmentListItemFooterExtendRender == 'function'
+      {typeof attachmentListItemFooterExtendRender === 'function'
         ? attachmentListItemFooterExtendRender(file)
         : attachmentListItemFooterExtendRender}
     </div>

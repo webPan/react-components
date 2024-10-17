@@ -16,12 +16,13 @@ import React, {
   useState,
 } from 'react';
 import useAttachmentListItemRender from './hooks/useAttachmentListItemRender';
-import { type QkUploadType } from './index.d';
 import './index.less';
+import { type QkUploadType } from './interface';
 import languageDict from './language';
 export type UploadHandle = {
   onTriggerUpload: () => void;
 };
+
 /** 文件上传组件 带进度条 */
 const QkUploadFund = (
   props: UploadProps & QkUploadType,
@@ -177,7 +178,7 @@ const QkUploadFund = (
           {uploadButtonRender !== null && (
             <div>
               {uploadButtonRender ? (
-                typeof uploadButtonRender == 'function' ? (
+                typeof uploadButtonRender === 'function' ? (
                   uploadButtonRender({ onTriggerUpload })
                 ) : (
                   uploadButtonRender

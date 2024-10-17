@@ -2,20 +2,20 @@ import AMapLoader from '@amap/amap-jsapi-loader';
 import 'echarts-extension-amap';
 import * as echarts from 'echarts/core';
 
-import './index.scss';
-import React, {
-  useEffect,
-  useRef,
-  type CSSProperties,
-  useState,
-  useLayoutEffect,
-  useImperativeHandle,
-  forwardRef
-} from 'react';
-const classNames = require('classnames');
-import { districts } from './chinaPdata';
-import ReactDOMServer from 'react-dom/server';
 import { useUpdateEffect } from 'ahooks';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { districts } from './chinaPdata';
+import './index.scss';
+const classNames = require('classnames');
 
 export interface PointType {
   id: string | number; // 辅助作用
@@ -151,7 +151,7 @@ const CreateTipInfoPanel: React.FC<{
 
 const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
   props,
-  ref
+  ref,
 ) => {
   const {
     AMapOptions = {},
@@ -166,45 +166,45 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
     mapZoomShortcut = 'mousewheel',
     autoLocateScaleLevels = false,
     isAddProvinceNamesLayer = true,
-    language = 'cn'
+    language = 'cn',
   } = props;
   const mapRef = useRef<HTMLDivElement>(null);
   const gdMap = useRef<{ AMap: any; map: any; chart: any }>({
     AMap: null,
     map: null,
-    chart: null
+    chart: null,
   });
   const layer = useRef({
     province: [],
     china: [],
-    loadLayer: ''
+    loadLayer: '',
   });
   const [ctrlPressed, setCtrlPressed] = useState(false);
   const drawConnectLinesOptions = {
     endPoints: [],
     color: {
       start: '#F7A61B',
-      end: '#01FE7D'
+      end: '#01FE7D',
     },
     symbolSize: 10,
     effectSymbol:
       'image://data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjVweCIgaGVpZ2h0PSIyNXB4IiB2aWV3Qm94PSIwIDAgMjUgMjUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+57yW57uEIDEzNDwvdGl0bGU+CiAgICA8ZyBpZD0i6aG16Z2iLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSLnvJbnu4QtMTM0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjIzNzAwMCwgMC40OTg5ODcpIj4KICAgICAgICAgICAgPHJlY3QgaWQ9IuefqeW9oiIgZmlsbD0iI0Q4RDhEOCIgb3BhY2l0eT0iMCIgeD0iMCIgeT0iMCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48L3JlY3Q+CiAgICAgICAgICAgIDxwb2x5Z29uIGlkPSLot6/lvoQtNTblpIfku70tOCIgZmlsbD0iIzAxRkU3RCIgcG9pbnRzPSIxMi4zOTU5ODAzIDQgNyAxOS44MjYyMjI5IDExLjkzNzYxNDUgMTYuNDk1NzU5OCAxNy4zNDIyOTU1IDE5LjgyNjIyMjkiPjwvcG9seWdvbj4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==',
-    ...props.drawConnectLinesOptions
+    ...props.drawConnectLinesOptions,
   };
   /** 语言字典 */
   const languageDictionary = {
     cn: {
-      mapZoomTips: '按Ctrl + 滚轮可缩放地图'
+      mapZoomTips: '按Ctrl + 滚轮可缩放地图',
     },
     en: {
-      mapZoomTips: 'Press Ctrl + scroll wheel to zoom the map'
-    }
+      mapZoomTips: 'Press Ctrl + scroll wheel to zoom the map',
+    },
   };
   const dataSource = [
     ...(props.dataSource || []),
     ...(drawConnectLinesOptions?.endPoints || []).filter(
-      (item: Record<string, any>) => item.lngLat
-    )
+      (item: Record<string, any>) => item.lngLat,
+    ),
   ];
   /** 显示对应的省名称 start  */
   const addProvinceNamesLayer = () => {
@@ -225,9 +225,9 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             fontWeight: 'normal',
             fillColor: '#000',
             strokeColor: '#fff',
-            strokeWidth: 2
-          }
-        }
+            strokeWidth: 2,
+          },
+        },
       };
       const district = districts[i];
       const name = district[language === 'en' ? 'name_en' : 'name_cn'];
@@ -246,7 +246,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
       collision: true,
       // 设置 allowCollision：true，可以让标注避让用户的标注
       allowCollision: true,
-      passMouse: true
+      passMouse: true,
     });
     labelsLayer.add(labels);
     labelsLayer.setMap(map);
@@ -257,7 +257,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
   /** 获取边界路径 */
   const getBoundaryInfo = async (
     name: string,
-    isGenerateAuxPath = false
+    isGenerateAuxPath = false,
   ): Promise<{ polygon: any; district: any; auxPolygons: any }> => {
     const { AMap, map } = gdMap.current;
     if (!AMap || !map || !name) {
@@ -268,7 +268,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         level: 'province',
         extensions: 'all',
         subdistrict: 0,
-        showbiz: false
+        showbiz: false,
       });
       district.search(name, (status: any, result: any) => {
         if (result.info === 'OK') {
@@ -277,7 +277,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             new AMap.LngLat(-360, 90, true),
             new AMap.LngLat(-360, -90, true),
             new AMap.LngLat(360, -90, true),
-            new AMap.LngLat(360, 90, true)
+            new AMap.LngLat(360, 90, true),
           ];
           const holes = result.districtList[0].boundaries || [];
           const pathArray = [outer, ...holes];
@@ -287,7 +287,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             strokeWeight: strokeOptions?.strokeWeight ?? 1,
             fillColor: strokeOptions?.fillColor ?? '#000',
             fillOpacity: strokeOptions?.fillOpacity ?? 0.8,
-            ...strokeOptions
+            ...strokeOptions,
           });
           polygon.setPath(pathArray);
           /** 生成一个辅助透明路径，让绘制的区域能够以最佳的方式显示 */
@@ -298,7 +298,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
                 pathL: holes[i],
                 strokeColor: 'transparent',
                 strokeWeight: 0,
-                fillOpacity: 0
+                fillOpacity: 0,
               });
               auxPolygon.setPath(holes[i]);
               auxPolygons.push(auxPolygon);
@@ -343,7 +343,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
 
   /** 绘制行政区域 */
   const drawDistrictLayer = (
-    districtLayerOptions: Record<string, any> | undefined
+    districtLayerOptions: Record<string, any> | undefined,
   ) => {
     const { AMap, map } = gdMap.current;
     if (!AMap || !map) return;
@@ -357,9 +357,9 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         'nation-stroke': 'rgba(0,0,0,0)', // 设置国境线颜色
         'coastline-stroke': 'rgba(0,0,0,0)', // 设置海岸线颜色
         'province-stroke': 'rgba(0,0,0,0)', // 设置省界颜色
-        fill: 'rgba(0,0,0,0)'
+        fill: 'rgba(0,0,0,0)',
       },
-      ...(districtLayerOptions || {})
+      ...(districtLayerOptions || {}),
     };
     const disCountry = new AMap.DistrictLayer.Country(options);
     disCountry.setMap(map);
@@ -372,8 +372,8 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
     map.add(
       new AMap.TileLayer.Satellite({
         opacity: 1,
-        detectRetina: true
-      })
+        detectRetina: true,
+      }),
     );
   };
   /** 加载海量点 */
@@ -384,7 +384,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
     const options = {
       color: 'red', // 点颜色
       animation: 'DIFFUSION', // 动画 点扩散
-      size: 8 // 点大小 无需带单位
+      size: 8, // 点大小 无需带单位
     };
     const markers: any[] = [];
     const data = [...dataSource];
@@ -395,11 +395,11 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         position: row.lngLat, // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
         content: `<div style="--color:${row.color};--animation:${row.animation};--size:${row.size}px" class="icon-marker"></div>`,
         extData: {
-          id: row.id
+          id: row.id,
         },
         anchor: 'center',
         offset: new AMap.Pixel(0, 0), // 以 icon 的 [center bottom] 为原点
-        zIndex: 999
+        zIndex: 999,
       });
       /** 是否给标点的详细地址  */
       if (data[i].address) {
@@ -407,7 +407,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
           // isCustom: true, // 使用自定义窗体
           content: data[i]?.address,
           offset: new AMap.Pixel(0, -15),
-          autoMove: true
+          autoMove: true,
           // closeWhenClickMap: true
         });
         data[i]?.address && InfoWindow.open(map, marker.getPosition());
@@ -427,12 +427,12 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
                 data={row}
                 render={infoWindow?.render}
                 options={infoWindow?.options}
-              />
+              />,
             ),
 
             offset: new AMap.Pixel(0, -15),
             autoMove: true,
-            closeWhenClickMap: true
+            closeWhenClickMap: true,
           });
           AMap.closeInfoWindow = () => {
             InfoWindow.close();
@@ -456,7 +456,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
     document.addEventListener('keydown', (e) => {
       e.stopPropagation();
       gdMap.current.map.setStatus({
-        scrollWheel: true
+        scrollWheel: true,
       });
       if (e.keyCode === 17) setCtrlPressed(true);
     });
@@ -464,7 +464,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
     document.addEventListener('keyup', (e) => {
       e.stopPropagation();
       gdMap.current.map.setStatus({
-        scrollWheel: false
+        scrollWheel: false,
       });
       if (e.keyCode === 17) setCtrlPressed(false);
     });
@@ -514,7 +514,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
       const points = item.from || [];
       points.forEach((lngLat: any[]) => {
         data.push({
-          coords: [lngLat, item.lngLat]
+          coords: [lngLat, item.lngLat],
         });
       });
     });
@@ -538,12 +538,12 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         symbolSize: 15,
         itemStyle: {
           normal: {
-            color: key
-          }
+            color: key,
+          },
         },
         data: data.map((item: PointType) => ({
-          value: item.lngLat
-        }))
+          value: item.lngLat,
+        })),
       };
       scatters.push(scatterOptions);
     }
@@ -558,7 +558,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
           trailLength: 0,
           symbol: drawConnectLinesOptions.effectSymbol,
           symbolSize: drawConnectLinesOptions.symbolSize,
-          color: '#01FE7D'
+          color: '#01FE7D',
         },
         lineStyle: {
           normal: {
@@ -568,27 +568,27 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
-                color: drawConnectLinesOptions?.color?.start || ''
+                color: drawConnectLinesOptions?.color?.start || '',
               },
               {
                 offset: 1,
-                color: drawConnectLinesOptions?.color?.end || ''
-              }
-            ])
-          }
+                color: drawConnectLinesOptions?.color?.end || '',
+              },
+            ]),
+          },
         },
-        data
+        data,
       },
-      ...scatters
+      ...scatters,
     ];
     console.log({ series });
     gdMap.current.chart.setOption({
-      series
+      series,
     });
   };
   useImperativeHandle(ref, () => ({
     loadMap,
-    gdMap: gdMap.current
+    gdMap: gdMap.current,
   }));
 
   /** 加载地图 */
@@ -601,7 +601,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         key: '475c97e5ba9c55b5bbf684b116fe3c6e', // 申请好的Web端开发者Key，首次调用 load 时必填
         version: '1.4.15', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
         plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-        ...options
+        ...options,
       }).then(async (AMap) => {
         window.AMap = AMap;
         const echartsAmap = document.getElementById('echarts-amap');
@@ -618,9 +618,9 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             center: [117.552366, 41.997914],
             resizeEnable: true,
             scrollWheel: false,
-            ...AMapOptions
+            ...AMapOptions,
           },
-          series: []
+          series: [],
         };
         chart.setOption(option);
         // @ts-ignore
@@ -630,7 +630,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         gdMap.current = {
           map,
           AMap,
-          chart
+          chart,
         };
         /** 是否加载省名称 */
         if (isAddProvinceNamesLayer) {
@@ -640,7 +640,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
         const plugin = [
           isObject(strokeOptions) && 'AMap.DistrictSearch',
           isObject(tileLayerOptions) && 'AMap.TileLayer',
-          isObject(districtLayerOptions) && 'AMap.DistrictLayer'
+          isObject(districtLayerOptions) && 'AMap.DistrictLayer',
         ].filter(Boolean);
         AMap.plugin(plugin, () => {
           /** 给中国地图绘制边界  */
@@ -662,7 +662,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
             // 开启标注避让，默认为开启，v1.4.15 新增属性
             collision: false,
             // 开启标注淡入动画，默认为开启，v1.4.15 新增属性
-            animation: true
+            animation: true,
           });
           map.add(layer);
           await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -698,7 +698,7 @@ const QkGaoDeMap: React.ForwardRefRenderFunction<unknown, QkGaoDeMapType> = (
       className={classNames(
         { 'qk-pointer-events-none': ctrlPressed },
         'qk-gao-de-map h-full w-full',
-        className
+        className,
       )}
       style={style}
     >

@@ -1,7 +1,7 @@
 import type { UploadFile } from 'antd/es/upload/interface';
 import React from 'react';
 import _delete from './images/icon-delete.svg';
-import type { UploadFilePlus } from './index.d';
+import type { UploadFilePlus } from './interface';
 import { getFileType } from './tools';
 
 /** 附件简单列表渲染 */

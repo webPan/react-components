@@ -6,7 +6,7 @@ import {
 import { Button } from 'antd';
 import React, { RefObject, useRef } from 'react';
 import { replaceState } from 'react-components';
-import { formatColumns, formatDataSource } from './utils.ts';
+import { formatColumns, formatDataSource } from './utils';
 
 type QkProTableType = Omit<ProTableProps<any, any>, 'search'> & {
   ellipsis?: boolean;
@@ -34,7 +34,7 @@ const QkProTable: React.FC<QkProTableType> & Record<string, any> = (props) => {
         item.ellipsis = true;
       }
       scrollWidth += Number(item.width) ?? 50;
-      if (item.title == '操作') {
+      if (item.title === '操作') {
         item.fixed = 'right';
         item.ellipsis = void 0;
       }
