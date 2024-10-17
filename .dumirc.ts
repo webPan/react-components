@@ -6,5 +6,6 @@ export default defineConfig({
     name: 'react',
     nav: [{ title: '组件库', link: '/components' }],
     docDirs: 'md',
+    base: '/react-components',
   },
 });
