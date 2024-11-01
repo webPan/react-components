@@ -1,10 +1,10 @@
 ---
 hero:
-  title: React
+  title: Components
   description: React组件库
   actions:
     - text: 组件示例
-      link: /components/qk-btn-group-collapsed
+      link: /components/intro
     - text: 博客
       link: https://www.cnblogs.com/yz-blog
     - text: Gitee
@@ -20,4 +20,3 @@ features:
     emoji: 🚀
     description: 各个项目收集总结而来
 ---
-
